@@ -1,6 +1,7 @@
 class CardTypeUtils:
 
     def __init__(self, card_type="standart") -> None:
+        """CardTypeUtils is a class with settings of cards. The only default setting implemented is named standart."""
         if card_type == "standart":
             letter_numbers = ["J", "Q", "K", "A"]
             self._card_type = card_type
@@ -11,22 +12,27 @@ class CardTypeUtils:
             self._card_suits_letter = [suit[0] for suit in self._card_suits]
 
     def __repr__(self) -> str:
+        """Prints card settings."""
+        card_set = "CARD SETTINGS:\n"
         title = "Card type: " + self._card_type + "\n"
         numbers = "Card numbers:\n" + ", ".join(self._card_numbers) + "\n"
         suits = "Card suits:\n" + ", ".join(self._card_suits) + "\n"
-        ret = title + numbers + suits
+        ret = card_set + title + numbers + suits
         return ret
 
     @property
     def card_numbers(self) -> list:
+        """Returns card numbers."""
         return self._card_numbers
 
     @property
     def card_suits(self) -> list:
+        """Returns card suits."""
         return self._card_suits
 
     @property
     def letter_numbers(self) -> list:
+        """Returns card letter numbers."""
         return self._letter_numbers
 
     def suit_check(self, suit: str, raise_ex=True) -> bool:
@@ -103,5 +109,6 @@ class CardTypeUtils:
 
 if __name__ == "__main__":
     ctu = CardTypeUtils()
+    print(ctu)
     card_input = "h2"
     print(ctu.user_card_input(card_input))

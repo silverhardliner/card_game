@@ -6,6 +6,11 @@ from card_type_utils import CardTypeUtils as ctu
 class Player:
 
     def __init__(self, name: str, age: int, card_type: ctu) -> None:
+        """The player class represents a game player and is initialised by parameters below:
+        name: name of the player
+        age: age of the player
+        card_type: card type settings
+        """
         self._cards_in_hand = []
         self._name = name
         self._age = age
@@ -22,19 +27,24 @@ class Player:
         self._user_card_input = card_type.user_card_input
 
     def __repr__(self) -> str:
+        """Prints player name with his cards."""
         card_str = self.card_string()
-        return self._name + " with cards:\n" + card_str
+        title = "PLAYER:\n"
+        return title + self._name + " with cards:\n" + card_str
 
     def card_string(self) -> str:
+        """Creates a string of player's cards."""
         card_str = ', '.join(one_card.to_string()
                              for one_card in self._cards_in_hand)
         return card_str
 
     def draw_card(self, deck: Deck) -> None:
+        """Draws a card from deck."""
         new_card = deck.draw_card()
         self._cards_in_hand.append(new_card)
 
     def play_card(self, target_deck: Deck) -> Card:
+        """Takes input from user as player, handles the input and play the card to the target deck."""
         cond = True
         while cond:
             print("Choose a card!\n" + self.card_string())
