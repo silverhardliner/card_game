@@ -30,7 +30,7 @@ class Player:
         """Prints player name with his cards."""
         card_str = self.card_string()
         title = "PLAYER:\n"
-        return title + self._name + " with cards:\n" + card_str
+        return f"{title}{self._name} {self._age} with cards:\n {card_str}"#title + self._name +  + " with cards:\n" + card_str
 
     def card_string(self) -> str:
         """Creates a string of player's cards."""
