@@ -11,6 +11,8 @@ class CardTypeUtils:
             self._card_suits = ["hearts", "clubs", "diamonds", "spades"]
             self._card_suits_letter = [suit[0] for suit in self._card_suits]
 
+            self._start_num_cards = 4
+
     def __repr__(self) -> str:
         """Prints card settings."""
         card_set = "CARD SETTINGS:\n"
@@ -34,6 +36,11 @@ class CardTypeUtils:
     def letter_numbers(self) -> list:
         """Returns card letter numbers."""
         return self._letter_numbers
+    
+    @property
+    def start_num_cards(self) -> int:
+        """Return the starting number of cards."""
+        return self._start_num_cards
 
     def suit_check(self, suit: str, raise_ex=True) -> bool:
         """Checks if input suit is valid suit. Returns bool."""

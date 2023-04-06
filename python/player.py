@@ -30,7 +30,22 @@ class Player:
         """Prints player name with his cards."""
         card_str = self.card_string()
         title = "PLAYER:\n"
-        return f"{title}{self._name} {self._age} with cards:\n {card_str}"#title + self._name +  + " with cards:\n" + card_str
+        return f"{self._name} {self._age} with cards:\n {card_str}"#title + self._name +  + " with cards:\n" + card_str
+
+    @property
+    def name(self) -> str:
+        """Returns players name."""
+        return self._name
+
+    @property
+    def age(self) -> int:
+        """Returns player's age."""
+        return self._age
+    
+    @property
+    def cards_in_hand(self) -> list:
+        """Returns players cards in hand."""
+        return self._cards_in_hand
 
     def card_string(self) -> str:
         """Creates a string of player's cards."""
@@ -47,20 +62,36 @@ class Player:
         """Takes input from user as player, handles the input and play the card to the target deck."""
         cond = True
         while cond:
+            print(f"Top card: {target_deck.look_at_top_card()}")
             print("Choose a card!\n" + self.card_string())
             input_card = str(input("Card: "))
             suit, number = self._user_card_input(input_card)
             if suit and number:
                 played_card = Card(suit, number, self._card_type)
                 print(played_card)
-                if played_card in self._cards_in_hand:
+                print()
+
+                c1 = self.handle_card(played_card, target_deck)
+                c2 = played_card in self._cards_in_hand
+
+                if c1 and c2:
                     cond = False
             else:
                 print("This card is not in your hand, choose another!")
 
-        target_deck.add_card(played_card)
         self._cards_in_hand.remove(played_card)
         return played_card
+    
+    def handle_card(self, card: Card, deck: Deck) -> bool:
+        """Handles the played card."""
+        played_success = False
+        top_card = deck.look_at_top_card()
+        if card.suit == top_card.suit or card.number == top_card.number:
+            deck.add_card(card)
+            played_success = True
+        else:
+            print(f"You cannot play this card, choose another!")
+        return played_success
 
 
 if __name__ == "__main__":
