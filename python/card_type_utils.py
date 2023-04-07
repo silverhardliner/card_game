@@ -11,7 +11,7 @@ class CardTypeUtils:
             self._card_suits = ["hearts", "clubs", "diamonds", "spades"]
             self._card_suits_letter = [suit[0] for suit in self._card_suits]
 
-            self._start_num_cards = 4
+            self._draw_button = "x"
 
     def __repr__(self) -> str:
         """Prints card settings."""
@@ -41,6 +41,11 @@ class CardTypeUtils:
     def start_num_cards(self) -> int:
         """Return the starting number of cards."""
         return self._start_num_cards
+    
+    @property
+    def draw_button(self) -> str:
+        """Return the char for drawing a card."""
+        return self._draw_button
 
     def suit_check(self, suit: str, raise_ex=True) -> bool:
         """Checks if input suit is valid suit. Returns bool."""
@@ -78,7 +83,10 @@ class CardTypeUtils:
         suit = None
         str_in_len = len(str_in)
 
-        if str_in_len == 2:
+        if str_in_len == 1:
+            if str_in == self._draw_button:
+                suit = str_in
+        elif str_in_len == 2:
             list_in = list(str_in)
             for i in list_in:
                 if self.number_check(i, False):
@@ -109,7 +117,7 @@ class CardTypeUtils:
         suit = None
         csl = self._card_suits_letter
         for i in range(len(csl)):
-            if letter == csl[i]:
+            if letter.lower() == csl[i]:
                 suit = self._card_suits[i]
         return suit
 
